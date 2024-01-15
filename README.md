@@ -18,7 +18,7 @@ Beberapa fitur yang terdapat pada E-Shop antara lain:
 
 Untuk menginstal E-Shop, ikuti langkah-langkah berikut:
 
-1. Clone repository ini dengan menggunakan command `git clone https://github.com/adptra01/E-Shop.git`
+1. Clone repository ini dengan menggunakan command `git clone https://github.com/AndiSAG01/E-Shop.git`
 2. Pindah ke direktori project dengan command `cd E-Shop`
 3. Install dependency yang dibutuhkan dengan command `composer install` dan `npm install`
 4. Copy file `.env.example` dan ubah nama file menjadi `.env`. Kemudian, sesuaikan konfigurasi database di file tersebut beserta `.apikey RajaOngkir`.
