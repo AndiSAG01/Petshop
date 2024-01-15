@@ -1,9 +1,9 @@
 <x-apps>
     <x-slot name="title">
-        Administrator
+        Data Supplier
     </x-slot>
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 font-weight-bold">ADMIN TOKO</h1>
+        <h1 class="h3 mb-2 text-gray-800 font-weight-bold">DATA SUPPLIER</h1>
         @if (session('success'))
             <div class="alert alert-primary shadow" role="alert">
                 {{ session('success') }}
@@ -13,7 +13,7 @@
                 Ada yang salah dengan inputan anda, silahkan input ulang.
             </div>
         @endif
-        @include('admin.administrator.tambah')
+        @include('admin.sp.tambah')
     </div>
 
     <div class="card shadow m-3">
@@ -22,22 +22,24 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Email</th>
+                        <th>Nama Pelaggan</th>
+                        <th>alamat</th>
+                        <th>No Telphone</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($admin as $no => $item)
+                    @foreach ($supplier as $no => $sp)
                         <tr>
                             <td class="text-center">{{ ++$no }} </td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->email }}</td>
+                            <td>{{ $sp->name }}</td>
+                            <td>{{ $sp->address }}</td>
+                            <td>{{ $sp->no_telp }}</td>
                             <td class="text-center">
                                 <div class="d-flex" style="gap: 5px">
-                                    <a href="/administrator/{{ $item->id }}/edit" class="btn btn-warning"><i
+                                    <a href="/sp/{{ $sp->id }}/edit" class="btn btn-warning"><i
                                             class="fa fa-gavel" aria-hidden="true"></i> Ubah</a>
-                                    <form action="/administrator/{{ $item->id }}" method="POST">
+                                    <form action="/sp/{{ $sp->id }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button onclick="return confirm('Yakin ingin menghapus data?')"

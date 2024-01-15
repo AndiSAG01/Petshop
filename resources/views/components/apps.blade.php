@@ -79,6 +79,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
+                        @if (Auth()->user()->role == 'admin')
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,32 +98,34 @@
                                 <h6 class="dropdown-header">
                                     Pemberitahuan
                                 </h6>
+                                    
                                 @php
                                     $order_terbaru = App\Order::join('status_order', 'status_order.id', '=', 'order.status_order_id')
-                                        ->join('users', 'users.id', '=', 'order.user_id')
-                                        ->select('order.*', 'status_order.name', 'users.name as nama_pemesan')
-                                        ->limit(10)
-                                        ->get();
-                                @endphp
+                                    ->join('users', 'users.id', '=', 'order.user_id')
+                                    ->select('order.*', 'status_order.name', 'users.name as nama_pemesan')
+                                    ->limit(10)
+                                    ->get();
+                                    @endphp
                                 @foreach ($order_terbaru as $order)
-                                    <a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('admin.transaksi.detail', ['id' => $order->id]) }}">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500 text-uppercase" sty>{{ $order->invoice }} -
-                                                {{ $order->nama_pemesan }} - {{ $order->name }}</div>
-                                            <span class="font-weight-bold">Rp.
-                                                {{ number_format($order->subtotal + $order->ongkir, 2, ',', '.') }}</span>
+                                <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('admin.transaksi.detail', ['id' => $order->id]) }}">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500 text-uppercase" sty>{{ $order->invoice }} -
+                                        {{ $order->nama_pemesan }} - {{ $order->name }}</div>
+                                        <span class="font-weight-bold">Rp.
+                                            {{ number_format($order->subtotal + $order->ongkir, 2, ',', '.') }}</span>
                                         </div>
                                     </a>
-                                @endforeach
-                            </div>
-                        </li>
-
+                                    @endforeach
+                                </div>
+                            </li>
+                            
+                            @endif
                         <div class="topbar-divider d-none d-sm-block"></div>
 
 

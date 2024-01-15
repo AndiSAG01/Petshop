@@ -13,11 +13,15 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\LaporanController;
+use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\admin\PelangganController;
 use App\Http\Controllers\admin\PengaturanController;
 use App\Http\Controllers\admin\PenginapanadmController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ReceivableController;
 use App\Http\Controllers\admin\RekeningController;
+use App\Http\Controllers\admin\SpController;
+use App\Http\Controllers\admin\SupplierController as AdminSupplierController;
 use App\Http\Controllers\admin\TransaksiController;
 use App\Http\Controllers\user\AlamatController;
 use App\Http\Controllers\user\CheckoutController;
@@ -42,7 +46,7 @@ Route::get('/produk/cari', [ProdukController::class, 'cari'])->name('user.produk
 Route::get('/kategori/{id}', [KategoriController::class, 'produkByKategori'])->name('user.kategori');
 Route::get('/produk/{id}', [ProdukController::class, 'detail'])->name('user.produk.detail');
 
-Route::group(['middleware' => ['auth', ]], function () {
+Route::group(['middleware' => ['auth','checkRole:admin,pemilik,supplier' ]], function () {
     Route::get('/admin', 'DashboardController@index')->name('admin.dashboard');
     Route::put('/identity/{id}', [PengaturanController::class, 'identity']);
     Route::prefix('/pengaturan')->group(function () {
@@ -102,11 +106,33 @@ Route::group(['middleware' => ['auth', ]], function () {
     Route::post('/admin/rekening/update/{id}', [RekeningController::class, 'update'])->name('admin.rekening.update');
 
     #supplier
-    Route::get('/admin/supplier', [SupplierController::class, 'index'])->name('admin.supplier');
-    Route::get('/admin/supplier/edit/{id}', [SupplierController::class, 'edit'])->name('admin.supplier.edit');
-    Route::post('/admin/supplier/store', [SupplierController::class, 'store'])->name('admin.supplier.store');
-    Route::get('/admin/supplier/delete/{id}', [SupplierController::class, 'delete'])->name('admin.supplier.delete');
-    Route::post('/admin/supplier/update/{id}', [SupplierController::class, 'update'])->name('admin.supplier.update');
+    Route::get('/supplier',[AdminSupplierController::class , 'index'])->name('supplier.index');
+    Route::post('/supplier/store',[AdminSupplierController::class,'store'])->name('supplier.store');
+    Route::get('/supplier/{id}/edit', [AdminSupplierController::class, 'show']);
+    Route::post('/supplier/{id}', [AdminSupplierController::class, 'update']);
+    Route::delete('/supplier/{id}', [AdminSupplierController::class, 'destroy']);
+
+     #sp
+     Route::get('/sp',[SpController::class , 'index'])->name('sp.index');
+     Route::post('/sp/store',[SpController::class,'store'])->name('sp.store');
+     Route::get('/sp/{id}/edit', [SpController::class, 'show']);
+     Route::post('/sp/{id}', [SpController::class, 'update']);
+     Route::delete('/sp/{id}', [SpController::class, 'destroy']);
+
+    #piutang
+    Route::get('/receivable',[ReceivableController::class ,'index'])->name('receivable.index');
+    Route::post('/receivable/store',[ReceivableController::class,'store'])->name('receivable.store');
+    Route::get('/receivable/{id}/edit', [ReceivableController::class, 'show']);
+    Route::post('/receivable/{id}', [ReceivableController::class, 'update']);
+    Route::delete('/receivable/{id}', [ReceivableController::class, 'destroy']);
+
+    #payment
+    Route::get('/payment',[PaymentController::class ,'index'])->name('payment.index');
+    Route::post('/payment/store',[PaymentController::class,'store'])->name('payment.store');
+    Route::get('/payment/{id}/edit', [PaymentController::class, 'show']);
+    Route::post('/payment/{id}', [PaymentController::class, 'update']);
+    Route::delete('/payment/{id}', [PaymentController::class, 'delete']);
+
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
@@ -136,14 +162,14 @@ Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
     Route::get('/order/pembayaran/{id}', [OrderController::class, 'pembayaran'])->name('user.order.pembayaran');
     Route::post('/order/kirimbukti/{id}', [OrderController::class, 'kirimbukti'])->name('user.order.kirimbukti');
 
-    #sewa dan transaksi
-    Route::get('/sewa/{id}', [SewaController::class, 'index'])->name('user.sewa');
-    Route::post('/sewa/store', [SewaController::class, 'store'])->name('user.sewa.store');
-    Route::get('/transaksi', [SewaController::class, 'transaksi'])->name('user.transaksi');
-    Route::get('/user/transaksi/{id}', [SewaController::class, 'confirmasi'])->name('user.transaksi.konfirmasi');
+    // #sewa dan transaksi
+    // Route::get('/sewa/{id}', [SewaController::class, 'index'])->name('user.sewa');
+    // Route::post('/sewa/store', [SewaController::class, 'store'])->name('user.sewa.store');
+    // Route::get('/transaksi', [SewaController::class, 'transaksi'])->name('user.transaksi');
+    // Route::get('/user/transaksi/{id}', [SewaController::class, 'confirmasi'])->name('user.transaksi.konfirmasi');
 
-    #hotel
-    Route::get('/penginapan', [PenginapanController::class, 'index'])->name('user.penginapan');
+    // #hotel
+    // Route::get('/penginapan', [PenginapanController::class, 'index'])->name('user.penginapan');
 });
 
 Route::prefix('contact')->group(function () {
@@ -156,6 +182,9 @@ Route::prefix('admin/contact')->group(function () {
     Route::get('/', [ContactController::class, 'tables'])->name('contact');
     Route::get('/{id}', [ContactController::class, 'show'])->name('contact.show');
 });
+
+
+
 
 // ==============================================================
 // Lanjut di bawah

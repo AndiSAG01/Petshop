@@ -37,10 +37,11 @@ class LoginController extends Controller
             return RouteServiceProvider::ADMIN;
         }elseif (auth()->user()->role == 'pemilik') {
             return RouteServiceProvider::ADMIN;
+        }elseif(auth()->user()->role == 'supplier') {
+            return RouteServiceProvider::ADMIN;
         }
-
-        return RouteServiceProvider::ROOT;
-    }
+            return RouteServiceProvider::ROOT;
+        }
 
     /**
      * Create a new controller instance.

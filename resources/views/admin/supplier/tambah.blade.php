@@ -20,11 +20,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.supplier.store') }}" method="POST">
+                <form action="{{ route('supplier.store') }}" method="POST">
                     @csrf
                     <div class="form-row mb-2">
                         <div class="col">
-                            <label for="exampleInputUsername1">Nama Supplier</label>
+                            <label for="exampleInputUsername1">Nama Pelanggan</label>
                             <input type="text" class="form-control" name="name">
                             @error('name')
                                 <small class="text-danger">{{ $message}}</small>
@@ -39,9 +39,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputUsername1">Nama Barang</label>
-                        <input type="text" class="form-control" name="name_item">
-                        @error('name_item')
+                        <label for="exampleInputUsername1">Alamat</label>
+                        <input type="text" class="form-control" name="address">
+                        @error('address')
                                 <small class="text-danger">{{ $message}}</small>
                             @enderror
                     </div>
