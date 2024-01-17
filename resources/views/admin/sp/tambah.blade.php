@@ -24,7 +24,7 @@
                     @csrf
                     <div class="form-row mb-2">
                         <div class="col">
-                            <label for="exampleInputUsername1">Nama Pelanggan</label>
+                            <label for="exampleInputUsername1">Nama Supplier</label>
                             <input type="text" class="form-control" name="name">
                             @error('name')
                                 <small class="text-danger">{{ $message}}</small>

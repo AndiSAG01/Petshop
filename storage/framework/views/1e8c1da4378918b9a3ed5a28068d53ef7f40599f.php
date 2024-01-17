@@ -49,7 +49,7 @@ unset($__errorArgs, $__bag); ?>
                             <label for="code">Piutang</label>
                             <select name="receivable_id" id="code" class="form-control" >
                                 <?php $__currentLoopData = $receivable; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($rv->id); ?>"><?php echo e($rv->id); ?>.) <?php echo e($rv->total); ?></option>
+                                    <option value="<?php echo e($rv->id); ?>"><?php echo e($rv->id); ?>.) <?php echo e($rv->name_item); ?> Rp. <?php echo number_format($rv->total,0,',','.'); ?> </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>

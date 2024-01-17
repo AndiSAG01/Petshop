@@ -14,7 +14,7 @@
             </div>
         @endif
         @if (Auth()->user()->role == 'admin')
-        @include('admin.payment.tambah')
+            @include('admin.payment.tambah')
         @endif
     </div>
     <div class="card shadow m-3">
@@ -25,13 +25,13 @@
                         <th>No.</th>
                         <th>Tanggal</th>
                         <th>Nama Supplier</th>
-                        <th>piutang</th>
+                        <th>Nama Item Dan Piutang</th>
                         <th>Bukti TF</th>
                         <th>pembayaran</th>
                         <th>Sisa</th>
                         <th>status</th>
                         @if (Auth()->user()->role == 'admin')
-                        <th>Aksi</th>
+                            <th>Aksi</th>
                         @endif
                     </tr>
                 </thead>
@@ -41,40 +41,39 @@
                             <td class="text-center">{{ ++$no }} </td>
                             <td>{{ $py->date }}</td>
                             <td>{{ $py->sp->name }}</td>
-                            <td>{{ $py->receivable->total }}</td>
+                            <td>{{ $py->receivable->name_item }} @currency($py->receivable->total)</td>
                             <td>
                                 <img src="{{ Storage::url($py->image) }}"
-                                    style="object-fit: cover; object-position: center; width: 200px; height: 200px;" alt="">
+                                    style="object-fit: cover; object-position: center; width: 200px; height: 200px;"
+                                    alt="">
                             </td>
-                            <td>{{ $py->pay }}</td>
+                            <td> @currency($py->pay) </td>
                             <td>
-                               @php
-                                   $sisa = $py->receivable->total - $py->pay 
-                               @endphp
-
-                               {{ $sisa }}
+                                @php
+                                    $sisa = $py->receivable->total - $py->pay;
+                                @endphp
+                                @currency($sisa)
                             </td>
                             <td>
                                 @if ($sisa == 0)
                                     <a href="" class="btn btn-success">LUNAS</a>
-                                    @else
-                                    
+                                @else
                                     <a href="" class="btn btn-danger">BELUM LUNAS</a>
                                 @endif
                             </td>
                             @if (Auth()->user()->role == 'admin')
-                            <td class="text-center">
-                                <div class="d-flex" style="gap: 5px">
-                                    <a href="/payment/{{ $py->id }}/edit" class="btn btn-warning"><i
-                                            class="fa fa-gavel" aria-hidden="true"></i> Ubah</a>
-                                    <form action="/payment/{{ $py->id }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button onclick="return confirm('Yakin ingin menghapus data?')"
-                                            class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
-                                    </form>
-                                </div>
-                            </td>
+                                <td class="text-center">
+                                    <div class="d-flex" style="gap: 5px">
+                                        <a href="/payment/{{ $py->id }}/edit" class="btn btn-warning"><i
+                                                class="fa fa-gavel" aria-hidden="true"></i> Ubah</a>
+                                        <form action="/payment/{{ $py->id }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button onclick="return confirm('Yakin ingin menghapus data?')"
+                                                class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
                             @endif
                         </tr>
                     @endforeach

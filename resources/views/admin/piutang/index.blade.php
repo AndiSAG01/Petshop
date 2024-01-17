@@ -27,7 +27,6 @@
                         <th>Jumlah Barang</th>
                         <th>Harga Satuan</th>
                         <th>Jumalh Total Harga</th>
-                        <th>status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -38,16 +37,9 @@
                             <td>{{ $pt->supplier->name }}</td>
                             <td>{{ $pt->name_item }}</td>
                             <td>{{ $pt->quantity }}</td>
-                            <td>{{ $pt->price }}</td>
+                            <td>@currency($pt->price) </td>
                             <td>
-                              {{ $pt->total }}
-                            </td>
-                            <td>
-                                {{-- @if ($total == 0)
-                                    <a href="" class="btn btn-success btn-block">Lunas</a>
-                                @else
-                                    <a href="" class="btn btn-danger btn-block">Belum Lunas</a>
-                                @endif --}}asdaadsa
+                                @currency($pt->total) 
                             </td>
                             <td class="text-center">
                                 <div class="d-flex" style="gap: 5px">

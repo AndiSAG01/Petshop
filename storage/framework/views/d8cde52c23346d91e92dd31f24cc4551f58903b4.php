@@ -20,7 +20,7 @@
             </div>
         <?php endif; ?>
         <?php if(Auth()->user()->role == 'admin'): ?>
-        <?php echo $__env->make('admin.payment.tambah', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('admin.payment.tambah', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
     </div>
     <div class="card shadow m-3">
@@ -31,13 +31,13 @@
                         <th>No.</th>
                         <th>Tanggal</th>
                         <th>Nama Supplier</th>
-                        <th>piutang</th>
+                        <th>Nama Item Dan Piutang</th>
                         <th>Bukti TF</th>
                         <th>pembayaran</th>
                         <th>Sisa</th>
                         <th>status</th>
                         <?php if(Auth()->user()->role == 'admin'): ?>
-                        <th>Aksi</th>
+                            <th>Aksi</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
@@ -47,41 +47,40 @@
                             <td class="text-center"><?php echo e(++$no); ?> </td>
                             <td><?php echo e($py->date); ?></td>
                             <td><?php echo e($py->sp->name); ?></td>
-                            <td><?php echo e($py->receivable->total); ?></td>
+                            <td><?php echo e($py->receivable->name_item); ?> Rp. <?php echo number_format($py->receivable->total,0,',','.'); ?></td>
                             <td>
                                 <img src="<?php echo e(Storage::url($py->image)); ?>"
-                                    style="object-fit: cover; object-position: center; width: 200px; height: 200px;" alt="">
+                                    style="object-fit: cover; object-position: center; width: 200px; height: 200px;"
+                                    alt="">
                             </td>
-                            <td><?php echo e($py->pay); ?></td>
+                            <td> Rp. <?php echo number_format($py->pay,0,',','.'); ?> </td>
                             <td>
-                               <?php
-                                   $sisa = $py->receivable->total - $py->pay 
-                               ?>
+                                <?php
+                                    $sisa = $py->receivable->total - $py->pay;
+                                ?>
 
-                               <?php echo e($sisa); ?>
-
+                                Rp. <?php echo number_format($sisa,0,',','.'); ?>
                             </td>
                             <td>
                                 <?php if($sisa == 0): ?>
                                     <a href="" class="btn btn-success">LUNAS</a>
-                                    <?php else: ?>
-                                    
+                                <?php else: ?>
                                     <a href="" class="btn btn-danger">BELUM LUNAS</a>
                                 <?php endif; ?>
                             </td>
                             <?php if(Auth()->user()->role == 'admin'): ?>
-                            <td class="text-center">
-                                <div class="d-flex" style="gap: 5px">
-                                    <a href="/payment/<?php echo e($py->id); ?>/edit" class="btn btn-warning"><i
-                                            class="fa fa-gavel" aria-hidden="true"></i> Ubah</a>
-                                    <form action="/payment/<?php echo e($py->id); ?>" method="POST">
-                                        <?php echo csrf_field(); ?>
-                                        <?php echo method_field('delete'); ?>
-                                        <button onclick="return confirm('Yakin ingin menghapus data?')"
-                                            class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
-                                    </form>
-                                </div>
-                            </td>
+                                <td class="text-center">
+                                    <div class="d-flex" style="gap: 5px">
+                                        <a href="/payment/<?php echo e($py->id); ?>/edit" class="btn btn-warning"><i
+                                                class="fa fa-gavel" aria-hidden="true"></i> Ubah</a>
+                                        <form action="/payment/<?php echo e($py->id); ?>" method="POST">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('delete'); ?>
+                                            <button onclick="return confirm('Yakin ingin menghapus data?')"
+                                                class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
                             <?php endif; ?>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

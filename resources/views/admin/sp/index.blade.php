@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama Pelaggan</th>
+                        <th>Nama Supplier</th>
                         <th>alamat</th>
                         <th>No Telphone</th>
                         <th>Aksi</th>

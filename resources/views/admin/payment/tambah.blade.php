@@ -42,7 +42,7 @@
                             <label for="code">Piutang</label>
                             <select name="receivable_id" id="code" class="form-control" >
                                 @foreach ($receivable as $rv)
-                                    <option value="{{ $rv->id }}">{{ $rv->id }}.) {{ $rv->total }}</option>
+                                    <option value="{{ $rv->id }}">{{ $rv->id }}.) {{ $rv->name_item }} @currency($rv->total) </option>
                                 @endforeach
                             </select>
                         </div>

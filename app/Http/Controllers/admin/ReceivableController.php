@@ -12,7 +12,7 @@ class ReceivableController extends Controller
     public function index()
     {
         $receivable = receivable::all();
-        $supplier = Supplier::whereDoesntHave('receivables')->get();
+        $supplier = Supplier::all();
 
         return view ('admin.piutang.index', compact('receivable','supplier'));
     }

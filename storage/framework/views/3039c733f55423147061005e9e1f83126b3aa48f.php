@@ -33,7 +33,6 @@
                         <th>Jumlah Barang</th>
                         <th>Harga Satuan</th>
                         <th>Jumalh Total Harga</th>
-                        <th>status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -44,13 +43,9 @@
                             <td><?php echo e($pt->supplier->name); ?></td>
                             <td><?php echo e($pt->name_item); ?></td>
                             <td><?php echo e($pt->quantity); ?></td>
-                            <td><?php echo e($pt->price); ?></td>
+                            <td>Rp. <?php echo number_format($pt->price,0,',','.'); ?> </td>
                             <td>
-                              <?php echo e($pt->total); ?>
-
-                            </td>
-                            <td>
-                                asdaadsa
+                                Rp. <?php echo number_format($pt->total,0,',','.'); ?> 
                             </td>
                             <td class="text-center">
                                 <div class="d-flex" style="gap: 5px">

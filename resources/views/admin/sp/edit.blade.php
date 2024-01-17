@@ -34,11 +34,11 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="exampleInputUsername1">Nama Pelanggan <small class="text-danger">Lama</small></label>
+                        <label for="exampleInputUsername1">Nama Supplier <small class="text-danger">Lama</small></label>
                         <input type="text" class="form-control" disabled value="{{ $supplier->name }}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="exampleInputUsername1">Nama Pelanggan <small class="text-success">Baru</small></label>
+                        <label for="exampleInputUsername1">Nama Supplier <small class="text-success">Baru</small></label>
                         <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         @error('name')
                             <small class="text-danger fw-bold">{{ $message }}</small>
