@@ -18,10 +18,12 @@ use App\Http\Controllers\admin\PelangganController;
 use App\Http\Controllers\admin\PengaturanController;
 use App\Http\Controllers\admin\PenginapanadmController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\PurchaseController;
 use App\Http\Controllers\admin\ReceivableController;
 use App\Http\Controllers\admin\RekeningController;
 use App\Http\Controllers\admin\SpController;
 use App\Http\Controllers\admin\SupplierController as AdminSupplierController;
+use App\Http\Controllers\admin\ThingController;
 use App\Http\Controllers\admin\TransaksiController;
 use App\Http\Controllers\user\AlamatController;
 use App\Http\Controllers\user\CheckoutController;
@@ -133,6 +135,25 @@ Route::group(['middleware' => ['auth','checkRole:admin,pemilik,supplier' ]], fun
     Route::post('/payment/{id}', [PaymentController::class, 'update']);
     Route::delete('/payment/{id}', [PaymentController::class, 'delete']);
 
+    #barang
+    Route::get('/admin/thing', [ThingController::class, 'index'])->name('admin.thing');
+    Route::get('/admin/thing/tambah', [ThingController::class, 'tambah'])->name('admin.thing.tambah');
+    Route::post('/admin/thing/store', [ThingController::class, 'store'])->name('admin.thing.store');
+    Route::get('/admin/thing/edit/{id}', [ThingController::class, 'edit'])->name('admin.thing.edit');
+    Route::get('/admin/thing/delete/{id}', [ThingController::class, 'delete'])->name('admin.thing.delete');
+    Route::post('/admin/thing/update/{id}', [ThingController::class, 'update'])->name('admin.thing.update');
+
+    #pesanan
+    Route::get('/admin/purchase', [PurchaseController::class, 'index'])->name('admin.purchase');
+    Route::get('/admin/purchase/tambah', [PurchaseController::class, 'tambah'])->name('admin.purchase.tambah');
+    Route::get('/admin/purchase/pesan/{id}', [PurchaseController::class, 'pesan'])->name('admin.purchase.pesan');
+    Route::post('/admin/purchase/store', [PurchaseController::class, 'store'])->name('admin.purchase.store');
+    Route::get('/admin/pesanan', [PurchaseController::class, 'tampilan'])->name('purchase.index');
+
+    #konfirmasi
+    // Route::post('/supplier-confirm/{id}', [PurchaseController::class, 'confirmDelivery'])->name('supplier.konfrimasi');
+    Route::put('/supplier/confirm/{id}',[PurchaseController::class,'confirm'])->name('supplier.confirm');
+    Route::put('/supplier/end/{id}',[PurchaseController::class,'end'])->name('supplier.end');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
@@ -162,14 +183,6 @@ Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
     Route::get('/order/pembayaran/{id}', [OrderController::class, 'pembayaran'])->name('user.order.pembayaran');
     Route::post('/order/kirimbukti/{id}', [OrderController::class, 'kirimbukti'])->name('user.order.kirimbukti');
 
-    // #sewa dan transaksi
-    // Route::get('/sewa/{id}', [SewaController::class, 'index'])->name('user.sewa');
-    // Route::post('/sewa/store', [SewaController::class, 'store'])->name('user.sewa.store');
-    // Route::get('/transaksi', [SewaController::class, 'transaksi'])->name('user.transaksi');
-    // Route::get('/user/transaksi/{id}', [SewaController::class, 'confirmasi'])->name('user.transaksi.konfirmasi');
-
-    // #hotel
-    // Route::get('/penginapan', [PenginapanController::class, 'index'])->name('user.penginapan');
 });
 
 Route::prefix('contact')->group(function () {

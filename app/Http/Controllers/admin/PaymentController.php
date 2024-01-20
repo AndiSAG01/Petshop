@@ -33,7 +33,7 @@ class PaymentController extends Controller
         ]);
            
         if  ($request->hasfile('image')) {
-            $imagePath = $request->file('image')->store('public/suppliers');
+            $imagePath = $request->file('image')->store('public/imageproducts');
             $validatedData['image'] = $imagePath;
         }
         
@@ -63,7 +63,7 @@ class PaymentController extends Controller
         ]);
            
         if  ($request->hasfile('image')) {
-            $imagePath = $request->file('image')->store('public/suppliers');
+            $imagePath = $request->file('image')->store('public/imageproducts');
             $validatedData['image'] = $imagePath;
         }
         payment::find($id)->update($validatedData);

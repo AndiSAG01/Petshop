@@ -251,6 +251,11 @@
             $('#mytable').DataTable();
         });
     </script>
+     <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
     <?php echo $__env->yieldContent('js'); ?>
 </body>
 

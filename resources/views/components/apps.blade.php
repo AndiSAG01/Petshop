@@ -230,6 +230,11 @@
             $('#mytable').DataTable();
         });
     </script>
+     <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
     @yield('js')
 </body>
 

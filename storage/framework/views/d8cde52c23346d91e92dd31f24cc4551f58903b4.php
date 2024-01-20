@@ -58,7 +58,6 @@
                                 <?php
                                     $sisa = $py->receivable->total - $py->pay;
                                 ?>
-
                                 Rp. <?php echo number_format($sisa,0,',','.'); ?>
                             </td>
                             <td>

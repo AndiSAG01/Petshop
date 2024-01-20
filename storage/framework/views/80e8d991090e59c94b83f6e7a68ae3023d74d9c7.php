@@ -21,22 +21,33 @@
          </li>
 
          <hr class="sidebar-divider">
+         <div class="sidebar-heading">
+            Pemesanan Supplier
+        </div>
+        <li class="nav-item <?php echo e(Request::path() === 'payment' ? 'active' : ''); ?>">
+           <a class="nav-link" href="<?php echo e(route('sp.index')); ?>">
+               <i class="fas fa-solid fa-users"></i>
+               <span>Data Supplier</span></a>
+       </li>
+
+       <li class="nav-item <?php echo e(Request::path() === 'purchase' ? 'active' : ''); ?>">
+           <a class="nav-link" href="<?php echo e(route('admin.purchase')); ?>">
+               <i class="fas fa-solid fa-street-view"></i>
+               <span>Data Pemesanan</span></a>
+       </li>
+
+        <li class="nav-item <?php echo e(Request::path() === 'payment' ? 'active' : ''); ?>">
+           <a class="nav-link" href="<?php echo e(route('payment.index')); ?>">
+               <i class="fas fa-solid fa-users"></i>
+               <span>Data Hutang</span></a>
+       </li>
+
+        <hr class="sidebar-divider">
 
          <!-- Heading -->
          <div class="sidebar-heading">
              Pengguna
          </div>
-         <li class="nav-item <?php echo e(Request::path() === 'payment' ? 'active' : ''); ?>">
-            <a class="nav-link" href="<?php echo e(route('sp.index')); ?>">
-                <i class="fas fa-solid fa-users"></i>
-                <span>Data Supplier</span></a>
-        </li>
-
-         <li class="nav-item <?php echo e(Request::path() === 'payment' ? 'active' : ''); ?>">
-            <a class="nav-link" href="<?php echo e(route('payment.index')); ?>">
-                <i class="fas fa-solid fa-users"></i>
-                <span>Data Hutang</span></a>
-        </li>
 
          <!-- Nav Item - Dashboard -->
          <li class="nav-item <?php echo e(Request::path() === 'administrator' ? 'active' : ''); ?>">
@@ -263,9 +274,24 @@
                  <span>Data Pelanggan</span></a>
          </li>
          <hr class="sidebar-divider">
-         <div class="sidebar-heading">
-             Transaksi
-         </div>
+
+         <li class="nav-item <?php echo e(Request::path() === 'Thing' ? 'active' : ''); ?>">
+            <a class="nav-link" href="<?php echo e(route('admin.thing')); ?>">
+                <i class="fas fa-solid fa-cube"></i>
+                <span>Produk Barang</span></a>
+        </li>
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Transaksi
+        </div>
+
+        <li class="nav-item <?php echo e(Request::path() === 'Pemesanan' ? 'active' : ''); ?>">
+            <a class="nav-link" href="<?php echo e(route('purchase.index')); ?>">
+                <i class="fas fa-solid fa-recycle"></i>
+                <span>Data Pemesanan</span></a>
+        </li>
+
          <li class="nav-item <?php echo e(Request::path() === 'piutang' ? 'active' : ''); ?>">
              <a class="nav-link" href="<?php echo e(route('receivable.index')); ?>">
                  <i class="fas fa-solid fa-users"></i>
