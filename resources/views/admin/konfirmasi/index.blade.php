@@ -39,7 +39,7 @@
                                     alt="{{ $product->thing->name }}">
                             </td>
                             <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->total }}</td>
+                            <td>@currency($product->total) </td>
                             <td>
                                 @if ($product->status == 'menunggu konfirmasi')
                                 <form action="{{ route('supplier.confirm', $product->id) }}" method="post">

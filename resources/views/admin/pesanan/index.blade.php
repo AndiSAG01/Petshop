@@ -96,10 +96,12 @@
                                     alt="{{ $product->thing->name }}">
                             </td>
                             <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->total }}</td>
+                            <td>@currency($product->total) </td>
                             <td>
                             @if ($product->status == 'Pesanan Telah Sampai')
                            <button class="btn btn-success">Telah di selesai</button>
+                            @elseif ($product->status == 'menunggu konfirmasi')
+                            <button class="btn btn-sm btn-primary">{{ $product->status }}</button>
                             @else
                             <button class="btn btn-sm btn-primary">{{ $product->status }}</button>
                             <p></p>
