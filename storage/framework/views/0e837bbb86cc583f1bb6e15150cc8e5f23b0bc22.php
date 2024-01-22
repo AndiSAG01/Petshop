@@ -35,25 +35,26 @@
             ?>
             <div class="row">
                 <div class="col-md mb-3">
-                    <img src="<?php echo e(Storage::url($random1->image)); ?>" alt="<?php echo e($random1); ?>" width="100%">
+                    <img src="<?php echo e(optional($random1)->image ? Storage::url($random1->image) : ''); ?>" alt="<?php echo e(optional($random1)->image); ?>" width="100%">
                 </div>
                 <div class="col-md">
                     <div class="row mb-4 justify-content-center align-items-center">
                         <?php $__currentLoopData = $random2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col w-50 m-auto">
-                                <img src="<?php echo e(Storage::url($item->image)); ?>" width="100%" alt="<?php echo e($item->name); ?>">
+                                <img src="<?php echo e(optional($item)->image ? Storage::url($item->image) : ''); ?>" width="100%" alt="<?php echo e(optional($item)->name); ?>">
                             </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="row mb-3 justify-content-center align-items-center">
                         <?php $__currentLoopData = $random3; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col w-50 m-auto">
-                                <img src="<?php echo e(Storage::url($item->image)); ?>" width="100%" alt="<?php echo e($item->name); ?>">
+                                <img src="<?php echo e(optional($item)->image ? Storage::url($item->image) : ''); ?>" width="100%" alt="<?php echo e(optional($item)->name); ?>">
                             </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
     <div class="site-section">
